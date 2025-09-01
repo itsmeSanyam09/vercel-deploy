@@ -3,6 +3,9 @@ import { copyFinalDist, downloadS3Folder } from "./aws";
 import path from "path";
 import { buildProject } from "./utils";
 import dotenv from "dotenv";
+import express from "express";
+
+const app = express();
 dotenv.config();
 const subscriber = createClient({
   url: `${process.env.redis_url}`,
@@ -26,3 +29,5 @@ async function main() {
   }
 }
 main();
+
+app.listen(process.env.PORT);
