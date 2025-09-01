@@ -16,6 +16,8 @@ const redis_1 = require("redis");
 const aws_1 = require("./aws");
 const utils_1 = require("./utils");
 const dotenv_1 = __importDefault(require("dotenv"));
+const express_1 = __importDefault(require("express"));
+const app = (0, express_1.default)();
 dotenv_1.default.config();
 const subscriber = (0, redis_1.createClient)({
     url: `${process.env.redis_url}`,
@@ -41,3 +43,4 @@ function main() {
     });
 }
 main();
+app.listen(process.env.PORT);
