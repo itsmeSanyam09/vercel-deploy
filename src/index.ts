@@ -18,14 +18,18 @@ publisher.connect();
 
 async function main() {
   while (1) {
-    const response = await subscriber.brPop("build-queue", 0);
-    console.log(response);
-    const id: string = response?.element ?? "jbjh";
-    await downloadS3Folder(`output/${id}`);
-    await buildProject(id);
-    await copyFinalDist(id);
-    await publisher.hSet("status", id, "deployed");
-    console.log("downloaded");
+    try {
+      const response = await subscriber.brPop("build-queue", 0);
+      console.log(response);
+      const id: string = response?.element ?? "jbjh";
+      await downloadS3Folder(`output/${id}`);
+      await buildProject(id);
+      await copyFinalDist(id);
+      await publisher.hSet("status", id, "deployed");
+      console.log("downloaded");
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 main();
