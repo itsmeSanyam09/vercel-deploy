@@ -4,7 +4,6 @@ import fs from "fs";
 import { getAllFiles } from "./utils";
 import dotenv from "dotenv";
 dotenv.config();
-
 const config = {
   bucket: `${process.env.bucket_name!}`,
 };
@@ -58,6 +57,8 @@ export async function downloadS3Folder(prefix: string) {
 
 export const uploadFile = async (fileName: string, localFilePath: string) => {
   console.log("called");
+  try {
+  } catch (error) {}
   const fileContent = fs.readFileSync(localFilePath);
   const response = await s3
     .upload({
