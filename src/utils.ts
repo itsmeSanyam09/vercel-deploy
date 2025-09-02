@@ -11,7 +11,7 @@ export function buildProject(id: string) {
       `cd ${path.join(
         __dirname,
         `output/${id}`
-      )} && npm install && npm run build`
+      )} && npm install && npx vite build`
     );
 
     child.stdout?.on("data", function (data) {
