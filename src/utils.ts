@@ -2,8 +2,10 @@ import { exec, spawn } from "child_process";
 import path, { resolve } from "path";
 import fs from "fs";
 
+const projectRoot = process.cwd();
+const relativeDir = path.relative(projectRoot, __dirname);
+
 export function buildProject(id: string) {
-  console.log("dirname in child process: ", __dirname);
   return new Promise((resolve) => {
     const child = exec(
       `cd ${path.join(
