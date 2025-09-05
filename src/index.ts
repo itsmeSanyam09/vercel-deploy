@@ -16,6 +16,13 @@ const publisher = createClient({
 });
 publisher.connect();
 
+app.get("/admin", (req, res) => {
+  try {
+    res.status(200).json({ "Deploy Service": "Working" });
+  } catch (error) {
+    res.status(401).json({ error: `${error}` });
+  }
+});
 async function main() {
   while (1) {
     try {
